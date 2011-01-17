@@ -9,12 +9,6 @@
 		var placeholderClassName = placeholderClassName || "placeholder",
 			supported = $.fn.placehold.is_supported();
 		
-		function toggle() {
-			for ( i = 0; i < arguments.length; i++ ) {
-				arguments[i].toggle();
-			}
-		}
-		
 		return supported ? this : this.each( function() {
 			var $elem = $( this ),
 				placeholder_attr = $elem.attr( "placeholder" );
@@ -31,13 +25,14 @@
 					});
 					
 					$pwd_shiv.bind( "focus.placehold", function() {
-						toggle( $elem, $pwd_shiv );
-						$elem.focus();
+						$pwd_shiv.hide();
+						$elem.show().focus();
 					});
 					
 					$elem.bind( "blur.placehold", function() {
 						if ( !$elem.val() ) {
-							toggle( $elem, $pwd_shiv );
+							$elem.hide();
+							$pwd_shiv.show();
 						}
 					});
 					
